@@ -7,4 +7,20 @@ export const Colors = {
   textPrimary: "#FFFFFF", // Main white text
   textSecondary: "#A0AAB2", // Muted gray text
   danger: "#FF4C4C", // The red for cancel buttons (like Netflix)
+  light: {
+    text: "#FFFFFF",
+    background: "#0B110D",
+    tint: "#23C481",
+    icon: "#A0AAB2",
+    tabIconDefault: "#A0AAB2",
+    tabIconSelected: "#23C481",
+  },
+  dark: {
+    text: "#FFFFFF",
+    background: "#0B110D",
+    tint: "#23C481",
+    icon: "#A0AAB2",
+    tabIconDefault: "#A0AAB2",
+    tabIconSelected: "#23C481",
+  },
 };

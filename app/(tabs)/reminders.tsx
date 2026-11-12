@@ -1,22 +1,58 @@
 import { Ionicons } from "@expo/vector-icons";
+import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-    SafeAreaView,
-    ScrollView,
-    StyleSheet,
-    Switch,
-    Text,
-    TouchableOpacity,
-    View,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Switch,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { Colors } from "../../constants/theme";
+import { useSubscriptions } from "../../context/SubscriptionContext";
 
 export default function RemindersScreen() {
-  // State to manage the toggles (matching the mockup's default states)
-  const [earlyWarning, setEarlyWarning] = useState(true);
-  const [actionReminder, setActionReminder] = useState(true);
-  const [emergencyStrike, setEmergencyStrike] = useState(false);
+  const { state, updateReminders } = useSubscriptions();
+
+  const [earlyWarning, setEarlyWarning] = useState(
+    state.reminders.earlyWarning72h
+  );
+  const [actionReminder, setActionReminder] = useState(
+    state.reminders.actionReminder24h
+  );
+  const [emergencyStrike, setEmergencyStrike] = useState(
+    state.reminders.emergencyStrike2h
+  );
+  const [savedBanner, setSavedBanner] = useState(false);
+
+  useEffect(() => {
+    setEarlyWarning(state.reminders.earlyWarning72h);
+    setActionReminder(state.reminders.actionReminder24h);
+    setEmergencyStrike(state.reminders.emergencyStrike2h);
+  }, [state.reminders]);
+
+  const handleSavePreferences = () => {
+    updateReminders({
+      earlyWarning72h: earlyWarning,
+      actionReminder24h: actionReminder,
+      emergencyStrike2h: emergencyStrike,
+    });
+
+    if (Platform.OS !== "web") {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(
+        () => {}
+      );
+    }
+
+    setSavedBanner(true);
+    setTimeout(() => {
+      setSavedBanner(false);
+    }, 2500);
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -26,7 +62,7 @@ export default function RemindersScreen() {
           <Ionicons name="chevron-back" size={24} color={Colors.textPrimary} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Reminders</Text>
-        <View style={{ width: 24 }} /> {/* Invisible spacer */}
+        <View style={{ width: 24 }} />
       </View>
 
       <ScrollView
@@ -106,8 +142,24 @@ export default function RemindersScreen() {
             </Text>
           </View>
 
+          {savedBanner ? (
+            <View style={styles.savedBanner}>
+              <Ionicons
+                name="checkmark-circle"
+                size={18}
+                color={Colors.primary}
+              />
+              <Text style={styles.savedBannerText}>
+                Alert preferences saved!
+              </Text>
+            </View>
+          ) : null}
+
           {/* Save Button */}
-          <TouchableOpacity style={styles.saveButton}>
+          <TouchableOpacity
+            style={styles.saveButton}
+            onPress={handleSavePreferences}
+          >
             <Text style={styles.saveButtonText}>Save Preferences</Text>
           </TouchableOpacity>
         </View>
@@ -161,10 +213,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#2A302D", // Subtle dividing line
+    borderBottomColor: "#2A302D",
   },
   lastSettingRow: {
-    borderBottomWidth: 0, // Removes the line for the last toggle
+    borderBottomWidth: 0,
     marginBottom: 16,
   },
   settingTextContainer: {
@@ -197,6 +249,21 @@ const styles = StyleSheet.create({
     fontSize: 12,
     flex: 1,
     lineHeight: 18,
+  },
+  savedBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(35, 196, 129, 0.14)",
+    borderRadius: 8,
+    paddingVertical: 10,
+    marginBottom: 14,
+    gap: 8,
+  },
+  savedBannerText: {
+    color: Colors.primary,
+    fontSize: 13,
+    fontWeight: "bold",
   },
   saveButton: {
     backgroundColor: Colors.primary,

@@ -42,3 +42,14 @@ app-example
 # generated native folders
 /ios
 /android
+
+# AI & Agent configuration files
+.agents/
+.agent/
+.claude/
+.cursor/
+.gemini/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+

@@ -1,50 +1,36 @@
-# Welcome to your Expo app 👋
+# Stopscription 🛡️
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Take control of your free trials and recurring subscriptions.**
 
-## Get started
+Stopscription is a cross-platform mobile and web application built with **Expo (React Native)** and **TypeScript** that tracks free trial expiration dates, alerts users before auto-billing occurs, and calculates total money saved from prevented charges.
 
-1. Install dependencies
+---
 
+## ✨ Key Features
+
+* **Shining Shield Animated Intro:** Custom branded splash & loading overlay powered by `react-native-reanimated`.
+* **Interactive Trial & Subscription Dashboard:**
+  * Track **My Trials**, **Recurring Subscriptions**, and **Cancellation History** in real time.
+  * Color-coded visual urgency progress bars and dynamic countdown badges (*Expires Tomorrow*, *X Days Left*).
+  * Live **Money Saved** counter that increments automatically when trials are stopped before renewal.
+* **1-Tap Popular Services Quick-Picker:** Instant auto-fill for *Spotify*, *Netflix*, *Canva Pro*, *ChatGPT Plus*, *YouTube Premium*, *Disney+*, and *Apple One* (including pricing, trial duration, and official cancellation URLs).
+* **Custom Cancellation Workflow & Undo Toast:** Open service cancellation pages directly in-app and undo accidental cancellations with a single tap.
+* **Multi-Stage Alert Preferences:** Configure *Early Warning (72h)*, *Action Reminder (24h)*, and *Emergency Strike (2h)* notifications.
+* **Hybrid State Management & Local Persistence:** Powered by React Context + `useReducer` + `@react-native-async-storage/async-storage` with multi-currency support (`PHP ₱` / `USD $`).
+
+---
+
+## 🚀 Getting Started
+
+1. **Install dependencies:**
    ```bash
    npm install
    ```
 
-2. Start the app
-
+2. **Start the development server:**
    ```bash
    npx expo start
    ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+   * Press **`w`** to launch in your web browser (`http://localhost:8081`).
+   * Scan the QR code with **Expo Go** on Android or iOS.
+   * Press **`a`** for Android Emulator or **`i`** for iOS Simulator.
